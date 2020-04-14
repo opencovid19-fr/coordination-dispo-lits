@@ -22,7 +22,7 @@ POSTGRES = {
     'pw': os.getenv('POSTGRES_PASSWORD'),
     'port': os.getenv('POSTGRES_PORT', 5432),
 }
-DB_URI = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+SQLALCHEMY_DATABASE_URI = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
 
 logging.basicConfig(
     filename=os.getenv('SERVICE_LOG', 'server.log'),

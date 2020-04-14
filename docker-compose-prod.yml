@@ -2,17 +2,15 @@ version: '3.5'
 
 services:
   server:
-    depends_on:
-        - testdb
-    environment:
-      - DB_HOST=testdb
-    command: python -m unittest
+    command: /start.sh
+    ports:
+      - ${APP_PORT_PROD}:80
 
-  testdb:
+  db:
     image: postgres:9.4
     volumes:
+      - dbdata:/var/lib/postgresql/data
       - ./docker/testdb/postgresql.conf:/etc/postgresql/postgresql.conf
-      - testdbdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -20,6 +18,9 @@ services:
     networks:
       - postgres
 
+networks:
+  postgres:
+    driver: bridge
 
 volumes:
-  testdbdata:
+  dbdata:
