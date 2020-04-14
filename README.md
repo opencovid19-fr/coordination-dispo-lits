@@ -13,11 +13,11 @@ Application source in python is included in the src directory and divided in pac
    - resource groups implementation of the route with flas-restful
    - route delares routes with blueprint using resources modeules
    - serializer declares objects for flask-restful-swagger
-   - validator declares mashmallow objects to serialize, response and validate request parameters 
+   - validator declares mashmallow objects to serialize, response and validate request parameters
 
 All config params are defined in the config module.
 
-Dev server is launch with module `server` 
+Dev server is launch with module `server`
 
 Shell commands are launch with module `manage`
 
@@ -27,7 +27,7 @@ Shell commands are launch with module `manage`
 Pre-requisite: copy .env-template to .env
 
 ```
-docker-compose run --rm server pip install -r requirements.txt --user --upgrade 
+docker-compose run --rm server pip install -r requirements.txt --user --upgrade
 docker-compose up -d server
 ```
 
@@ -45,15 +45,15 @@ docker exec -it <project_name>_db_server_1 bash
 
 ```shell
 # Prior to the first migration
-docker-compose run --rm server python src/manage.py db init
+docker-compose run --rm server python manage.py db init
 
 # Create a new version of the database
-docker-compose run --rm server python src/manage.py db migrate
+docker-compose run --rm server python manage.py db migrate
 # check file + remove comment + improve file if needed
 sudo vim migration/versions/<migration_id>.py
 
 # Upgrade your database to the last version
-docker-compose run --rm server python src/manage.py db upgrade
+docker-compose run --rm server python manage.py db upgrade
 ```
 
 ## Run tests
