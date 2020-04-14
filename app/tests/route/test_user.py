@@ -3,7 +3,7 @@ import unittest
 
 from model.user import User
 
-from test.utils.mixins import BaseTest, BaseAuthMixin
+from tests.utils.mixins import BaseTest, BaseAuthMixin
 
 
 class TestAuth(BaseTest):

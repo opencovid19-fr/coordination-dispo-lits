@@ -24,12 +24,13 @@ Shell commands are launch with module `manage`
 
 ## Installation
 
-Pre-requisite: copy .env-template to .env
-
+Pre-requisite: copy .env-template to .env and fill the needed variables, then run:
 ```
-docker-compose run --rm server pip install -r requirements.txt --user --upgrade
+make build
 docker-compose up -d server
 ```
+
+The diferent api routes should be displayed on `localhost:$API_PORT` where `API_PORT` is set in the `.env` file.
 
 ## Accessing containers
 
@@ -37,8 +38,8 @@ Require Docker >= 1.3
 
 ```shell
 # use 'docker ps' to see the list of your containers
-docker exec -it <project_name>_db_1 psql -Upostgres
-docker exec -it <project_name>_db_server_1 bash
+docker-compose exec db psql -Upostgres
+docker-compose exec server bash
 ```
 
 ## Migration process
