@@ -1,0 +1,13 @@
+[
+  {
+    "model": "model.User",
+    "records": [
+      {
+        "email": "joe@example.fr",
+        "firstname": null,
+        "lastname": null,
+        "password": "super-secret-password"
+      }
+    ]
+  }
+]

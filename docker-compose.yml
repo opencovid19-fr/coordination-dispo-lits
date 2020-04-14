@@ -1,0 +1,68 @@
+version: '3.5'
+
+services:
+  server:
+    env_file:
+      - .env
+    image: tomplex/python-postgres:3.6
+    working_dir: /mnt
+    volumes:
+      - .:/mnt
+    links:
+     - db
+    ports:
+      - '5000:5000'
+    command: python src/server.py
+    networks:
+      - postgres
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    networks:
+      - postgres
+
+  testserver:
+    env_file: .env
+    image: tomplex/python-postgres:3.6
+    working_dir: /mnt
+    volumes:
+      - .:/mnt
+    depends_on:
+      - testdb
+    ports:
+      - 5053:5053
+    environment:
+      PORT: 5053
+      DB_CONTAINER: testdb
+      POSTGRES_USER: docker
+      POSTGRES_PW: docker
+      POSTGRES_DB: docker
+    command: python -m unittest
+    networks:
+      - postgres
+
+  testdb:
+    image: postgres:9.4
+    container_name: testdb
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./docker/testdb/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+      - ./docker/testdb/postgresql.conf:/etc/postgresql/postgresql.conf
+    networks:
+      - postgres
+
+
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  dbdata:
