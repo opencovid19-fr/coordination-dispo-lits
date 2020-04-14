@@ -2,23 +2,15 @@ version: '3.5'
 
 services:
   server:
-    env_file:
-      - .env
-    build: .
-    volumes:
-      - ./app:/app
     depends_on:
-      - db
-    ports:
-      - $APP_PORT:5000
-    command: python server.py
-    networks:
-      - postgres
+        - testdb
+    environment:
+      - DB_HOST=testdb
+    command: python -m unittest
 
-  db:
+  testdb:
     image: postgres:9.4
     volumes:
-      - dbdata:/var/lib/postgresql/data
       - ./docker/testdb/postgresql.conf:/etc/postgresql/postgresql.conf
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
@@ -26,6 +18,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - postgres
+
 
 networks:
   postgres:
