@@ -13,7 +13,7 @@ api = swagger.docs(Api(api_blueprint), apiVersion='0.1',
                    resourcePath='/',
                    produces=["application/json", "text/html"],
                    api_spec_url='/docs',
-                   description='Coordinations lits api')
+                   description='Coordination lits api')
 
 api.add_resource(SignupApi, '/auth/signup')
 api.add_resource(LoginApi, '/auth/login')
