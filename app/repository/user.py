@@ -1,5 +1,4 @@
-from model.user import User
-from model.orga import Organization, Platform, FinessEtablissement, Address, Company, OrganisationType
+from model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType
 
 
 def find_users():
