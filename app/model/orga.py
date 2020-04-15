@@ -37,8 +37,8 @@ class Address(Base):
     street = db.Column(db.String(50))
     zipcode = db.Column(db.String(10))
     city = db.Column(db.String(50))
-    lon = db.Column(db.Integer)
-    lat = db.Column(db.Integer)
+    lon = db.Column(db.Float)
+    lat = db.Column(db.Float)
 
     organization = db.relationship("Organization", uselist=False, back_populates="address")
 
