@@ -1,12 +1,93 @@
 [
   {
-    "model": "model.User",
+    "model": "model.Address",
     "records": [
       {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "street": "30 rue des visiteurs",
+        "zipcode": "54344",
+        "city": "covid-19",
+        "lon": null,
+        "lat": null
+      }
+    ]
+  },
+  {
+    "model": "model.Company",
+    "records": [
+      {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "siret": "12345567890"
+      }
+    ]
+  },
+  {
+    "model": "model.FinessEtablissement",
+    "records": [
+      {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "finess_et": "12345567890",
+        "finess_ej": "12345567890"
+      }
+    ]
+  },
+  {
+    "model": "model.Platform",
+    "records": [
+      {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "Covidmoiunlit"
+      }
+    ]
+  },
+  {
+    "model": "model.Organization",
+    "records": [
+      {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "Hopital du Paradis",
+        "type": 1,
+        "address_id": 1000,
+        "object_type": "FinessEtablissement",
+        "object_id": 1000
+      }
+    ]
+  },
+  {
+    "model": "model.User",
+    "records": [
+      { "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
         "email": "joe@example.fr",
-        "firstname": null,
-        "lastname": null,
-        "password": "super-secret-password"
+        "firstname": "joe",
+        "lastname": "Leduc",
+        "password": "super-secret-password",
+        "phone_number": "0123456799",
+        "object_type": "Platform",
+        "object_id": 1000
+      },
+      {
+        "id": 1001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "email": "mickael@example.fr",
+        "firstname": "Michael",
+        "lastname": "Tartempion",
+        "password": "super-secret-password",
+        "phone_number": "0123456789",
+        "object_type": "Organization",
+        "object_id": 1000
       }
     ]
   }
