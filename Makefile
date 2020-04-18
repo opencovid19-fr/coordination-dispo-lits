@@ -1,4 +1,4 @@
-build:
+build: .env
 	docker-compose build
 
 test:
@@ -12,3 +12,6 @@ migrate:
 
 db_upgrade:
 	docker-compose run --rm server python manage.py db upgrade
+
+.env:
+	cp .env-template $@
