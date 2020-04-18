@@ -1,6 +1,9 @@
 build: .env
 	docker-compose build
 
+run:
+	docker-compose up -d
+
 test:
 	docker-compose -f docker-compose.yml -f docker-compose-test.yml run --rm server
 
