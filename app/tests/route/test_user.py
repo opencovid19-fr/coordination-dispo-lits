@@ -62,6 +62,7 @@ class TestUser(BaseAuthMixin, BaseTest):
                          {'organisation':
                               {'created_at': '2020-04-15T12:40:14.462544',
                                'updated_at': '2020-04-15T12:40:14.462544',
+
                                'id': 1000, 'name': 'Covidmoiunlit'},
                           'created_at': '2020-04-15T12:40:14.462544',
                           'updated_at': '2020-04-15T12:40:14.462544',
@@ -82,13 +83,14 @@ class TestUser(BaseAuthMixin, BaseTest):
                               {'address':
                                    {'created_at': '2020-04-15T12:40:14.462544',
                                     'updated_at': '2020-04-15T12:40:14.462544',
-                                    'street': '30 rue des visiteurs', 'zipcode':
-                                        '54344', 'city': 'covid-19', 'lon': None, 'lat': None},
+                                    'street': '30 rue des visiteurs', 'insee_code': None,
+                                    'zipcode': '54344', 'city': 'covid-19', 'lon': None, 'lat': None},
                                'data': {'created_at': '2020-04-15T12:40:14.462544',
                                         'updated_at': '2020-04-15T12:40:14.462544',
                                         'id': 1000, 'finess_et': '12345567890', 'finess_ej': '12345567890'},
                                'created_at': '2020-04-15T12:40:14.462544',
                                'updated_at': '2020-04-15T12:40:14.462544',
+                               'reg_code': None,
                                'id': 1000, 'name': 'Hopital du Paradis',
                                'type': 1, 'address_id': 1000},
                           'created_at': '2020-04-15T12:40:14.462544',

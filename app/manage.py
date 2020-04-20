@@ -1,6 +1,7 @@
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Command, Manager, Server, Shell
 from commands.fixture import LoadFixturesCommand
+from commands.loader import LoadRegionsCommand, LoadFinessEtablissementsCommand
 
 
 import config
@@ -14,6 +15,8 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 manager.add_command('load_fixtures', LoadFixturesCommand)
+manager.add_command('load_regions', LoadRegionsCommand)
+manager.add_command('load_finesset', LoadFinessEtablissementsCommand)
 
 if __name__ == '__main__':
     manager.run()

@@ -1,4 +1,4 @@
-from model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType
+from model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType, Region
 
 
 def find_users():
@@ -40,7 +40,7 @@ def get_user_by_email(email):
     return User.query.filter_by(email=email).first()
 
 
-def create_organization(name, address=None, company=None, etfiness=None):
+def create_organization(name, reg_code=None, address=None, company=None, etfiness=None):
     assert address is None or isinstance(address, dict)
     assert company is None or isinstance(company, dict)
     assert etfiness is None or isinstance(etfiness, dict)
@@ -50,13 +50,21 @@ def create_organization(name, address=None, company=None, etfiness=None):
     company_obj = Company(**company) if company else None
     etfiness_obj = FinessEtablissement(**etfiness) if etfiness else None
     if etfiness:
-        obj = Organization(name=name, type=OrganisationType.finess_et,
+        obj = Organization(name=name, reg_code=reg_code, type=OrganisationType.finess_et,
                            address=address_obj, data=etfiness_obj)
     else:
-        obj = Organization(name=name, type=OrganisationType.finess_et,
+        obj = Organization(name=name, reg_code=reg_code, type=OrganisationType.finess_et,
                            address=address_obj, data=company_obj)
     obj.save()
     return obj
+
+
+def get_or_create_region(**kwargs):
+    reg = Region.query.filter(Region.code==kwargs["code"]).first()
+    if not reg:
+        reg = Region(**kwargs)
+        reg.save()
+    return reg
 
 
 

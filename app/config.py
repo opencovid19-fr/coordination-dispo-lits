@@ -1,5 +1,8 @@
 import os, logging
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+
 DEBUG = os.getenv("ENVIRONEMENT") == "DEV"
 HOST = os.getenv('HOST', '0.0.0.0')
 PORT = int(os.getenv('PORT', '5000'))
