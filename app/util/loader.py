@@ -55,6 +55,6 @@ def load_finess_etablissements(filepath):
                 },
                 "etfiness": {
                     "finess_et": row[headers["finess"]],
-                    "finess_ej": row[headers["finess"]],
+                    "finess_ej": row[headers["finess_ej"]],
                 }
             }

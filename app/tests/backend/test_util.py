@@ -7,6 +7,7 @@ from tests.utils.mixins import BaseTest
 
 
 class TestLoader(BaseTest):
+    maxDiff = None
     fixtures = ["users.json"]
 
     def test_load_regions(self):
@@ -19,7 +20,6 @@ class TestLoader(BaseTest):
     def test_load_etablissements(self):
         filepath = os.path.join(config.DATA_DIR, "test_ars.csv")
         result = [item for item in load_finess_etablissements(filepath)]
-
         get_or_create_region(**{'code': '84', 'tncc': '1', 'libelle': 'Auvergne-Rhône-Alpes'})
         create_organization(**result[0])
 
@@ -34,7 +34,7 @@ class TestLoader(BaseTest):
                                        'lat': 46.22274478219284},
                            'etfiness': {
                                'finess_et': '010000024',
-                               'finess_ej': '010000024'
+                               'finess_ej': '010780054'
                            }},
                           {'name': 'CH DE BELLEY',
                            'reg_code': '84',
@@ -46,7 +46,7 @@ class TestLoader(BaseTest):
                                        'lat': 45.761208103246986},
                            'etfiness': {
                                'finess_et': '010000032',
-                               'finess_ej': '010000032',
+                               'finess_ej': '010780062',
                            }},
                           {'name': 'CH DE TREVOUX - MONTPENSIER',
                            'reg_code': '84',
@@ -58,7 +58,7 @@ class TestLoader(BaseTest):
                                        'lat': 45.9410740302987},
                            'etfiness': {
                                'finess_et': '010000065',
-                               'finess_ej': '010000065'
+                               'finess_ej': '010780096'
                            }},
                           {'name': 'CH DU PAYS DE GEX',
                            'reg_code': '84',
@@ -70,10 +70,9 @@ class TestLoader(BaseTest):
                                        'lat': 46.32233765353798},
                            'etfiness': {
                                'finess_et': '010000081',
-                               'finess_ej': '010000081',
+                               'finess_ej': '010780112',
                            }},
                           {'name': 'CH DE MEXIMIEUX',
-
                            'reg_code': '84',
                            'address': {'street': '13 AV DU DOCTEUR BOYER',
                                        'zipcode': '01800',
@@ -83,5 +82,5 @@ class TestLoader(BaseTest):
                                        'lat': 45.906191628020245},
                            'etfiness': {
                                'finess_et': '010000099',
-                               'finess_ej': '010000099'
+                               'finess_ej': '010780120'
                            }}])
