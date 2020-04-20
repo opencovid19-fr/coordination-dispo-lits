@@ -1,0 +1,57 @@
+name: docker-publish
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+
+  pull_request: # run job 'test'
+
+env:
+  IMAGE_NAME: covid-data-hub-server
+  REGISTRY: docker.pkg.github.com
+  AUTH: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: run tests
+        run: |
+          set -x
+          [ -f docker-compose.test.yml ] || exit 0
+
+          docker-compose --file docker-compose.test.yml build
+          docker-compose --file docker-compose.test.yml run sut
+
+  push:
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build image
+        run: docker build . --tag $IMAGE_NAME
+
+      - name: log into registry
+        run: docker login $REGISTRY -u ${{ github.actor }}
+             --password-stdin <<< "$AUTH"
+
+      - name: push image
+        run: |
+          VERSION=$(sed 's|refs/tags/v|| ; s|.*/||' <<< "${{ github.ref }}")
+          IMAGE_ID=$REGISTRY/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=$(tr '[A-Z]' '[a-z]' <<< "$IMAGE_ID")
+
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          docker tag  $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
