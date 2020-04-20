@@ -35,12 +35,21 @@ class Address(Base):
 
     id = db.Column(db.Integer, primary_key=True)
     street = db.Column(db.String(50))
+    insee_code = db.Column(db.String(10))
     zipcode = db.Column(db.String(10))
     city = db.Column(db.String(50))
     lon = db.Column(db.Float)
     lat = db.Column(db.Float)
 
     organization = db.relationship("Organization", uselist=False, back_populates="address")
+
+
+class Region(Base):
+    __tablename__ = 'orga_region'
+
+    code = db.Column(db.String(2),  primary_key=True)
+    tncc = db.Column(db.String(20), nullable=False)
+    libelle = db.Column(db.String(20), nullable=False)
 
 
 class Organization(Base):
@@ -52,6 +61,7 @@ class Organization(Base):
     name = db.Column(db.String(30), nullable=False)
     type = db.Column(ChoiceType(OrganisationType, impl=db.Integer()),
                      nullable=False, default=OrganisationType.finess_et)
+    reg_code = db.Column(db.String, db.ForeignKey('orga_region.code'))
 
     address_id = db.Column(db.Integer, db.ForeignKey('orga_address.id'))
     address = db.relationship(Address, back_populates="organization")
