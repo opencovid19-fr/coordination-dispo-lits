@@ -1,0 +1,96 @@
+[
+  {
+    "model": "covidbed.model.Contact",
+    "records": [
+      {
+        "id": 1000,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "email": "joe@example.fr",
+        "firstname": "joe",
+        "lastname": "Leduc",
+        "phone_number": "0123456799"
+      },
+      {
+        "id": 1001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "email": "bill@example.fr",
+        "firstname": "bill",
+        "lastname": "Lepotier",
+        "phone_number": "0123456798"
+      }
+    ]
+  },
+  {
+    "model": "covidbed.model.Address",
+    "records": [
+      {
+        "id": 1001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "street": "900 RTE DE PARIS",
+        "zipcode": "11440",
+        "insee_code": "11451",
+        "city": "VIRIAT",
+        "lon": 5.208596132279133,
+        "lat": 46.22274478219284
+      },
+      {
+        "id": 1002,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "street": "52 R GEORGES GIRERD",
+        "zipcode": "11300",
+        "insee_code": "11034",
+        "city": "BELLEY",
+        "lon": 5.684976115612651,
+        "lat": 45.761208103246986
+      }
+    ]
+  },
+   {
+    "model": "covidbed.model.FinessEtablissement",
+    "records": [
+      {
+        "id": 1001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "finess_et": "12345567880",
+        "finess_ej": "12345567880"
+      },
+      {
+        "id": 1002,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "finess_et": "12345567898",
+        "finess_ej": "12345567898"
+      }
+    ]
+  },
+  {
+    "model": "covidbed.model.Organization",
+    "records": [
+      {
+        "id": 1001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "CH FAKE 1",
+        "type": 1,
+        "address_id": 1001,
+        "object_type": "FinessEtablissement",
+        "object_id": 1001
+      },
+      {
+        "id": 1002,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "CH FAKE 2",
+        "type": 1,
+        "address_id": 1002,
+        "object_type": "FinessEtablissement",
+        "object_id": 1002
+      }
+    ]
+  }
+]

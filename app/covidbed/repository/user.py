@@ -59,6 +59,10 @@ def create_organization(name, reg_code=None, address=None, company=None, etfines
     return obj
 
 
+def get_organization(id):
+    return Organization.query.filter(Organization.id == id).first()
+
+
 def get_or_create_region(**kwargs):
     reg = Region.query.filter(Region.code==kwargs["code"]).first()
     if not reg:
