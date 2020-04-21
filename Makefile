@@ -16,5 +16,11 @@ migrate:
 db_upgrade:
 	docker-compose run --rm server python manage.py db upgrade
 
+clean: containers = hub_testdb_1 hub_db_1
+clean:
+	docker stop ${containers}
+	docker rm   ${containers}
+	docker-compose down
+
 .env:
 	cp .env-template $@
