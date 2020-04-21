@@ -4,7 +4,7 @@ build: .env
 run:
 	docker-compose up -d
 
-test:
+test: build
 	docker-compose -f docker-compose.yml -f docker-compose-test.yml run --rm server
 
 initdb:
