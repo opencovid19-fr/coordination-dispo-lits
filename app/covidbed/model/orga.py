@@ -55,7 +55,7 @@ class Region(Base):
 class Organization(Base):
     __tablename__ = 'orga_organization'
 
-    to_json_filter = ('object_type', 'object_id',)
+    to_json_filter = ('object_type', 'object_id', 'availabilities', )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)

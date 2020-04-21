@@ -1,0 +1,74 @@
+from flask_restful_swagger import swagger
+from flask_restful import fields
+
+
+@swagger.model
+class HumanSerializer:
+    resource_fields = {
+        'reanimators_count': fields.Integer,
+        'need_staff': fields.Integer,
+    }
+
+
+@swagger.model
+class BedSerializer:
+    resource_fields = {
+        'covid_available': fields.Integer,
+        'covid_used': fields.Integer,
+        'other_available': fields.Integer,
+        'other_used': fields.Integer,
+        'conventional_count': fields.Integer,
+        'continue_care_count': fields.Integer,
+        'reanimation_count': fields.Integer,
+        'post_urgency_count': fields.Integer,
+        'other_count': fields.Integer,
+    }
+
+
+@swagger.model
+class SupplySerializer:
+    resource_fields = {
+        'reanimators_count': fields.Integer,
+        'efp2_mask_count': fields.Integer,
+        'chir_mask_count': fields.Integer,
+        'blouses_count': fields.Integer,
+        'gowns_count': fields.Integer,
+    }
+
+
+@swagger.model
+class ContactSerializer:
+    resource_fields = {
+        'id': fields.Integer,
+        'firstname': fields.String,
+        'lastname': fields.String,
+        'phone_number': fields.String,
+        'email': fields.String,
+        'comment': fields.String,
+    }
+
+
+@swagger.model
+@swagger.nested(bed=BedSerializer.__name__)
+@swagger.nested(supply=SupplySerializer.__name__)
+@swagger.nested(human=HumanSerializer.__name__)
+@swagger.nested(contact=ContactSerializer.__name__)
+class ResourceSerializer:
+    resource_fields = {
+        'date': fields.DateTime,
+        'etablissement_id': fields.Integer,
+        'functional_unit': fields.String,
+        'bed': fields.List(fields.Nested(BedSerializer.resource_fields)),
+        'supply': fields.List(fields.Nested(SupplySerializer.resource_fields)),
+        'human': fields.List(fields.Nested(HumanSerializer.resource_fields)),
+        'contact': fields.List(fields.Nested(ContactSerializer.resource_fields))
+    }
+    required = ["date", 'etablissement_id']
+
+
+@swagger.model
+class ResourceCreationResponseSerializer:
+    resource_fields = {
+        'id': fields.Integer
+    }
+    required = ['id']
