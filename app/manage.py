@@ -5,7 +5,7 @@ from commands.loader import LoadRegionsCommand, LoadFinessEtablissementsCommand
 
 
 import config
-from covidbed.model import db
+from covidbed.model.abc import db
 from app import create_app
 
 app = create_app(config)

@@ -5,7 +5,7 @@ from flask_script import Command
 from flask_fixtures import load_fixtures, loaders
 
 import config
-from covidbed.model import db
+from covidbed.model.abc import db
 
 class LoadFixturesCommand(Command):
 
