@@ -1,4 +1,3 @@
-import json
 import os
 
 from flask import current_app
@@ -6,7 +5,7 @@ from flask_script import Command
 from flask_fixtures import load_fixtures, loaders
 
 import config
-from model.abc import db
+from covidbed.model import db
 
 class LoadFixturesCommand(Command):
 

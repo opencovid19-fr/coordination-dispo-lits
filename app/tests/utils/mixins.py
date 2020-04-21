@@ -1,17 +1,13 @@
 import unittest
 import json
-import config
 
 from flask_fixtures import FixturesMixin
 
 
 from server import server
-from model.abc import db
+from covidbed.model.abc import db
 
 server.config['TESTING'] = True
-server.config['SQLALCHEMY_BINDS'] = {
-    "main": config.SQLALCHEMY_DATABASE_URI
-}
 
 
 class BaseTest(unittest.TestCase, FixturesMixin):

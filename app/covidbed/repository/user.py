@@ -1,4 +1,4 @@
-from model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType, Region
+from covidbed.model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType, Region
 
 
 def find_users():

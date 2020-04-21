@@ -1,8 +1,8 @@
 import os
 import config
 
-from util.loader import load_finess_etablissements, load_regions
-from repository.user import get_or_create_region, create_organization
+from covidbed.util.loader import load_finess_etablissements, load_regions
+from covidbed.repository.user import get_or_create_region, create_organization
 from tests.utils.mixins import BaseTest
 
 

@@ -1,4 +1,4 @@
-from repository.user import create_user
+from covidbed.repository.user import create_user
 
 from tests.utils.mixins import BaseTest
 

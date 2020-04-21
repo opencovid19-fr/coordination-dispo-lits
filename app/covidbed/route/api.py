@@ -1,10 +1,9 @@
-import os
 from flask import Blueprint
 from flask_restful import Api
 from flask_restful_swagger import swagger
 
 from config import BASE_SERVER_PATH
-from resource.user import SignupApi, LoginApi, UserAPI, UserListAPI
+from covidbed.resource.user import SignupApi, LoginApi, UserAPI, UserListAPI
 
 api_blueprint = Blueprint('api', __name__)
 

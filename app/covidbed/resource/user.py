@@ -1,15 +1,14 @@
 import datetime
 
-from flask import request, jsonify, g
+from flask import request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required
 from flask_restful import  Resource
 from flask_restful_swagger import swagger
 
-from serializer.user import (SignupRequestSerializer, SignupResponseSerializer,
-                             SigninRequestSerializer, SigninResponseSerializer)
+from covidbed.serializer.user import (SignupRequestSerializer, SignupResponseSerializer,
+                                      SigninRequestSerializer, SigninResponseSerializer)
 
-from repository import user as user_repository
-
+from covidbed.repository import user as user_repository
 
 from sqlalchemy.orm.exc import NoResultFound
 

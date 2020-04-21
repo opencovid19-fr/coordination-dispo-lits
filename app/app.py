@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from flask_marshmallow import Marshmallow
 
-from model.abc import db, ma
+from covidbed.model.abc import db, ma
 
 
 def create_app(config_obj):
@@ -20,9 +19,9 @@ def create_app(config_obj):
         resources={r"/*": {"origins": "*"}},
         headers=['Content-Type', 'X-Requested-With', 'Authorization']
     )
-    from route.api import api_blueprint
+    from covidbed.route.api import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
 
-    from route.common import common_blueprint
+    from covidbed.route.common import common_blueprint
     app.register_blueprint(common_blueprint, url_prefix="/")
     return app

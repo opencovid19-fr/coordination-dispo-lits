@@ -1,11 +1,9 @@
-import config
 import os
 from flask_script import Command, Option
-from util.loader import load_regions, load_finess_etablissements
-from repository.user import create_organization, get_or_create_region
+from covidbed.util.loader import load_regions, load_finess_etablissements
+from covidbed.repository.user import create_organization, get_or_create_region
 
 import config
-from model.abc import db
 
 
 class LoadRegionsCommand(Command):
