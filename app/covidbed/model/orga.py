@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy_utils import generic_relationship, ChoiceType
 
-from model.abc import db, Base
+from .abc import db, Base
 
 
 class OrganisationType(enum.IntEnum):

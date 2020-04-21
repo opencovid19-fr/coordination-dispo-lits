@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from model.user import User
+from covidbed.model import User
 
 from tests.utils.mixins import BaseTest, BaseAuthMixin
 

@@ -1,11 +1,11 @@
 from flask_migrate import Migrate, MigrateCommand
-from flask_script import Command, Manager, Server, Shell
+from flask_script import Manager
 from commands.fixture import LoadFixturesCommand
 from commands.loader import LoadRegionsCommand, LoadFinessEtablissementsCommand
 
 
 import config
-from model.abc import db
+from covidbed.model import db
 from app import create_app
 
 app = create_app(config)
