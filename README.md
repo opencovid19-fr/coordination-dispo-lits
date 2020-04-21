@@ -1,38 +1,47 @@
-# coordination-dispo-lits
-Dépôt support pour la coordination des initiatives concernant la disponibilité des lits
+# Beds Availability Data Hub
 
 
-## Project's arboscence
+## Project files structure
 
-Application source in python is included in the src directory and divided in package as followed:
+Application source code (python) in the `app/` directory is divided
+in packages as follows:
 
-   - commands groups all custom shell commands to manage the application and are configure in the module `manage.py`
-   - fixtures groups json file used by tests or the command load fixtures
-   - covidbed groups all buiness packages for api:
-       - client groups all buiness function to interact with external sources
-       - model groups sqlalchemy model.
-       - repository groups dao functions with simple and comples sqlalchemy query
-       - resource groups implementation of the route with flas-restful
-       - route delares routes with blueprint using resources modeules
-       - serializer declares objects for flask-restful-swagger
-       - validator declares mashmallow objects to serialize, response and validate request parameters
+   - `fixtures`:   json file used by tests or the command load fixtures
+   - `commands`:   custom shell commands to manage the application
+                   configured in module `manage.py`
+   - `covidbed`:   buiness packages for api
+
+
+Package `covidbed` is structured as follows:
+
+   - `client`:     buiness function to interact with external sources
+   - `model`:      sqlalchemy model
+   - `repository`: dao functions with simple and comples sqlalchemy query
+   - `resource`:   implementation of the route with flas-restful
+   - `route`:      routes with blueprint using resources modeules
+   - `serializer`: objects for flask-restful-swagger
+   - `validator`:  mashmallow objects to serialize response
+                   and validate request parameters
+
 
 All config params are defined in the config module.
 
-Dev server is launch with module `server`
+Dev server is launched with module `server`
 
-Shell commands are launch with module `manage`
+Shell commands are launched with module `manage`
 
 
-## Installation
+## Running a production instance
 
-Pre-requisite: copy .env-template to .env and fill the needed variables, then run:
 ```
 make build
-docker-compose up -d server
+make run
 ```
 
-The diferent api routes should be displayed on `localhost:$API_PORT` where `API_PORT` is set in the `.env` file.
+Note: overall configuration file `.env` is initialized from `.env-template`
+      and should be fine for most use-cases; update to your liking as needed.
+
+The various api routes should be displayed on `localhost:$API_PORT` where `API_PORT` is set in the `.env` file.
 
 ## Accessing containers
 
