@@ -41,3 +41,4 @@ class User(Base):
     def get_id(self):
         """Return the email address to satisfy Flask-Login's requirements."""
         return self.email
+
