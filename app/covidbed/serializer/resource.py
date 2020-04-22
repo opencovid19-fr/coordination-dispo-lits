@@ -67,6 +67,18 @@ class ResourceSerializer:
 
 
 @swagger.model
+@swagger.nested(results=ResourceSerializer.__name__)
+class ResourceListResponseSerializer:
+    resource_fields = {
+        'total': fields.Integer,
+        'page': fields.Integer,
+        'size': fields.Integer,
+        'results': fields.List(fields.Nested(ResourceSerializer.resource_fields)),
+    }
+    required = ['total', "page", 'size', 'results']
+
+
+@swagger.model
 class ResourceCreationResponseSerializer:
     resource_fields = {
         'id': fields.Integer

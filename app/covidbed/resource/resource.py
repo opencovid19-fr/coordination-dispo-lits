@@ -4,8 +4,10 @@ from flask_restful import Resource
 from flask_restful_swagger import swagger
 
 from covidbed.validator import resource as ress_validator
-from covidbed.repository import user as user_repository, resource as ress_repository, orga as orga_repository
-from covidbed.serializer.resource import ResourceSerializer, ResourceCreationResponseSerializer
+from covidbed.repository import resource as ress_repository, orga as orga_repository
+from covidbed.serializer.resource import (ResourceSerializer, ResourceCreationResponseSerializer,
+                                          ResourceListResponseSerializer)
+from covidbed.util.validator import parse_params
 
 
 class ResourcesApi(Resource):
@@ -13,6 +15,49 @@ class ResourcesApi(Resource):
 
     @swagger.operation(
         notes="Resources",
+        responseClass=ResourceListResponseSerializer.__name__,
+        nickname='products',
+        parameters=[
+            {
+                "name": "page",
+                "description": "page number",
+                "required": True,
+                "allowMultiple": False,
+                "dataType": "int",
+                "paramType": "body"
+            },
+            {
+                "name": "size",
+                "description": "number of items returned",
+                "required": False,
+                "default": 10,
+                "allowMultiple": False,
+                "dataType": "int",
+                "paramType": "body"
+            }
+        ],
+        responseMessages=[
+            {
+                "code": 200,
+                "message": "List of products."
+            }
+
+        ])
+    @parse_params(
+        {'name': 'page', 'type': int, "default": 1},
+        {'name': 'size', 'type': int, "default": 10},
+    )
+    def get(self, params):
+        user = current_user
+
+        obj = ress_repository.list_availabilities_by_platform(user.organization, params.get("page"), params.get("size"))
+        return {"total": obj.total,
+                "page": params.get("page"),
+                "size": params.get("size"),
+                "results": [item.json for item in obj.items]}, 200
+
+    @swagger.operation(
+        notes='Resources',
         responseClass=ResourceCreationResponseSerializer.__name__,
         nickname="resources",
         parameters=[

@@ -8,6 +8,15 @@ from tests.utils.mixins import BaseTest, BaseAuthMixin
 class TestResources(BaseTest, BaseAuthMixin):
     fixtures = ["users.json", "resources.json"]
 
+    def test_get_ressources_availabilities(self):
+        token = self.authenticate('joe@example.fr', 'super-secret-password')
+        url = 'api/resources'
+        response = self.get(url, token, {"page": 1, "size": 3})
+        self.assertEqual(response.json["total"], 3)
+        self.assertEqual(response.json["page"], 1)
+        self.assertEqual(response.json["size"], 3)
+        self.assertEqual(len(response.json["results"]), 3)
+
     def test_create_availability(self):
         params = {
             "date": "2020-04-23T20:00:00",
