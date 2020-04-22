@@ -13,35 +13,6 @@ from covidbed.repository import user as user_repository
 from sqlalchemy.orm.exc import NoResultFound
 
 
-class SignupApi(Resource):
-
-    @swagger.operation(
-        notes='Signup',
-        responseClass=SignupResponseSerializer.__name__,
-        nickname='signup',
-        parameters=[
-            {
-                "name": "body",
-                "description": "signup's parameter",
-                "required": True,
-                "allowMultiple": False,
-                "dataType": SignupRequestSerializer.__name__,
-                "paramType": "body"
-            }
-        ],
-        responseMessages=[
-            {
-                "code": 200,
-                "message": "User is created."
-            }
-
-        ])
-    def post(self):
-        body = request.get_json()
-        user = user_repository.create_user(body)
-        return {'id': str(user.id)}, 200
-
-
 class LoginApi(Resource):
 
     @swagger.operation(

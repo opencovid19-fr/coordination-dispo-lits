@@ -30,23 +30,6 @@ class TestAuth(BaseTest):
         result = json.loads(response.data.decode('utf-8'))
         self.assertIn("token", result)
 
-    def test_signup(self):
-        params = {
-            "email": 'bill@example.fr',
-            "password": 'super-secret-password'
-        }
-        response = self.client.post(
-            '/api/auth/signup',
-            json=params,
-            content_type="application/json"
-
-        )
-        self.assertEqual(response.status_code, 200)
-        result = json.loads(response.data.decode('utf-8'))
-        self.assertIn("id", result)
-        self.assertEqual(result["id"], '1')
-
-
 class TestUser(BaseAuthMixin, BaseTest):
     maxDiff = None
     fixtures = ["users.json"]
