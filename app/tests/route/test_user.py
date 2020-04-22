@@ -59,7 +59,7 @@ class TestUser(BaseAuthMixin, BaseTest):
         self.assertEqual(response.status_code, 200)
         result = json.loads(response.data.decode('utf-8'))
         self.assertEqual(result,
-                         {'organisation':
+                         {'organization':
                               {'created_at': '2020-04-15T12:40:14.462544',
                                'updated_at': '2020-04-15T12:40:14.462544',
 
@@ -79,7 +79,7 @@ class TestUser(BaseAuthMixin, BaseTest):
         self.assertEqual(response.status_code, 200)
         result = json.loads(response.data.decode('utf-8'))
         self.assertEqual(result,
-                         {'organisation':
+                         {'organization':
                               {'address':
                                    {'created_at': '2020-04-15T12:40:14.462544',
                                     'updated_at': '2020-04-15T12:40:14.462544',
