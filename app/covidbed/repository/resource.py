@@ -26,3 +26,8 @@ def create_availability(platform, organization, date, functional_unit=None, bed=
 
 def get_contact(id):
     return Contact.query.filter(Contact.id==id).first()
+
+
+def list_availabilities_by_platform(platform, page=1, pernumber=10):
+    return Availability.query\
+        .join(Organization).filter(Availability.platform==platform).paginate(page, per_page=pernumber)
