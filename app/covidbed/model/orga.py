@@ -49,7 +49,7 @@ class Region(Base):
 
     code = db.Column(db.String(2),  primary_key=True)
     tncc = db.Column(db.String(20), nullable=False)
-    libelle = db.Column(db.String(20), nullable=False)
+    libelle = db.Column(db.String(30), nullable=False)
 
 
 class Organization(Base):
