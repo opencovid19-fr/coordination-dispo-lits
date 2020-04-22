@@ -26,6 +26,15 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - postgres
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:8080
+    networks:
+      - postgres
+
 
 networks:
   postgres:
