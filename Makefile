@@ -26,8 +26,8 @@ test_db:
 
 clean: containers = hub_testdb_1 hub_db_1
 clean:
-	docker stop ${containers}
-	docker rm   ${containers}
+	docker stop ${containers} || true
+	docker rm   ${containers} || true
 	docker-compose down
 
 compose.main = -f docker-compose.yml
