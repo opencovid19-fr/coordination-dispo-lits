@@ -1,7 +1,6 @@
-import json
 import unittest
 
-from covidbed.model import User, Organization, Availability
+from covidbed.model import Availability
 
 from tests.utils.mixins import BaseTest, BaseAuthMixin
 
@@ -9,7 +8,7 @@ from tests.utils.mixins import BaseTest, BaseAuthMixin
 class TestResources(BaseTest, BaseAuthMixin):
     fixtures = ["users.json", "resources.json"]
 
-    def test_create_avaivailability(self):
+    def test_create_availability(self):
         params = {
             "date": "2020-04-23T20:00:00",
             "etablissement_id": 1000,
@@ -34,8 +33,8 @@ class TestResources(BaseTest, BaseAuthMixin):
             },
             "supply": {
                 "respirators_count": 123,
-                "efp2_mask_count": 343,
-                "chir_mask_count": 345,
+                "efp2_masks_count": 343,
+                "chir_masks_count": 345,
                 "blouses_count": 23,
                 "gowns_count": 12
             },
@@ -67,7 +66,7 @@ class TestResources(BaseTest, BaseAuthMixin):
                           'post_urgency_count': 54})
         self.assertEqual(obj.json["supply"],
                          {'blouses_count': 23, 'gowns_count': 12,
-                          'chir_mask_count': 345, 'efp2_mask_count': 343, 'respirators_count': 123})
+                          'chir_masks_count': 345, 'efp2_masks_count': 343, 'respirators_count': 123})
         self.assertIsNone(obj.json["human"])
         for k, v in {'id': 1, "lastname": "Mistigri",
                      "firstname": "Le Chat",
@@ -76,7 +75,7 @@ class TestResources(BaseTest, BaseAuthMixin):
                      "comment": "ne pas deranger ....."}.items():
             self.assertEqual(obj.json["contact"][k], v)
 
-    def test_create_avaivailability_with_existing_contact(self):
+    def test_create_availability_with_existing_contact(self):
         params = {
             "date": "2020-04-23T20:00:00",
             "etablissement_id": 1000,
@@ -97,8 +96,8 @@ class TestResources(BaseTest, BaseAuthMixin):
             },
             "supply": {
                 "respirators_count": 123,
-                "efp2_mask_count": 343,
-                "chir_mask_count": 345,
+                "efp2_masks_count": 343,
+                "chir_masks_count": 345,
                 "blouses_count": 23,
                 "gowns_count": 12
             },
@@ -130,7 +129,7 @@ class TestResources(BaseTest, BaseAuthMixin):
                           'post_urgency_count': 54})
         self.assertEqual(obj.json["supply"],
                          {'blouses_count': 23, 'gowns_count': 12,
-                          'chir_mask_count': 345, 'efp2_mask_count': 343, 'respirators_count': 123})
+                          'chir_masks_count': 345, 'efp2_masks_count': 343, 'respirators_count': 123})
         self.assertIsNone(obj.json["human"])
         self.assertEqual(obj.json["contact"],
                          {'created_at': '2020-04-15T12:40:14.462544',
@@ -138,8 +137,7 @@ class TestResources(BaseTest, BaseAuthMixin):
                           'firstname': 'joe', 'lastname': 'Leduc', 'email': 'joe@example.fr',
                           'phone_number': '0123456799', 'comment': None})
 
-
-    def test_create_avaivailability_unknown_contact(self):
+    def test_create_availability_unknown_contact(self):
         params = {
             "date": "2020-04-23T20:00:00",
             "etablissement_id": 1000,
@@ -160,8 +158,8 @@ class TestResources(BaseTest, BaseAuthMixin):
             },
             "supply": {
                 "respirators_count": 123,
-                "efp2_mask_count": 343,
-                "chir_mask_count": 345,
+                "efp2_masks_count": 343,
+                "chir_masks_count": 345,
                 "blouses_count": 23,
                 "gowns_count": 12
             },
@@ -175,7 +173,7 @@ class TestResources(BaseTest, BaseAuthMixin):
         self.assertEqual(response.json, {'errors': [{'code': 'UNKNOWN_CONTACT',
                                                      'message': 'Unknown contact'}]})
 
-    def test_create_avaivailability_missing_contact_and_unknown_etablissement(self):
+    def test_create_availability_missing_contact_and_unknown_etablissement(self):
         params = {
             "date": "2020-04-23T20:00:00",
             "etablissement_id": 1,
@@ -196,8 +194,8 @@ class TestResources(BaseTest, BaseAuthMixin):
             },
             "supply": {
                 "respirators_count": 123,
-                "efp2_mask_count": 343,
-                "chir_mask_count": 345,
+                "efp2_masks_count": 343,
+                "chir_masks_count": 345,
                 "blouses_count": 23,
                 "gowns_count": 12
             },
@@ -212,8 +210,6 @@ class TestResources(BaseTest, BaseAuthMixin):
                          {'errors': [{'code': 'UNKNOWN_ETABLISSEMENT', 'message': 'Unknown etablissement'},
                                      {'code': 'CREATE_CONTACT',
                                       'message': 'lastname, firstname, email, phone_number are required'}]})
-
-
 
 
 if __name__ == '__main__':

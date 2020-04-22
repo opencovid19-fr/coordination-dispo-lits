@@ -8,8 +8,8 @@ class Human(Schema):
 
 class Supply(Schema):
     respirators_count = fields.Integer(required=False)
-    efp2_mask_count = fields.Integer(required=False)
-    chir_mask_count = fields.Integer(required=False)
+    efp2_masks_count = fields.Integer(required=False)
+    chir_masks_count = fields.Integer(required=False)
     blouses_count = fields.Integer(required=False)
     gowns_count = fields.Integer(required=False)
 

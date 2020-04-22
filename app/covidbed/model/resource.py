@@ -7,7 +7,7 @@ class Contact(Base):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(30), nullable=False)
     lastname = db.Column(db.String(30), nullable=False)
-    email = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(30), nullable=True)
     phone_number = db.Column(db.String(10), nullable=False)
     comment = db.Column(db.Text, nullable=True)
 
@@ -29,5 +29,3 @@ class Availability(Base):
 
     organization_id = db.Column(db.Integer, db.ForeignKey('orga_organization.id'), nullable=False)
     organization = db.relationship(Organization, backref="availabilities")
-
-
