@@ -51,6 +51,6 @@ class TestUser(BaseTest):
 
         expected_org = {'id': 1, 'name': 'Ma plateform'}
         for k, v in expected_org.items():
-            self.assertEqual(v, getattr(obj.organisation, k))
+            self.assertEqual(v, getattr(obj.organization, k))
 
 

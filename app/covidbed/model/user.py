@@ -23,7 +23,7 @@ class User(Base):
     object_type = db.Column(db.Unicode(255))
     # This is used to point to the primary key of the linked row.
     object_id = db.Column(db.Integer)
-    organisation = generic_relationship(object_type, object_id)
+    organization = generic_relationship(object_type, object_id)
 
     def __init__(self, email=None, password=None, **kwargs):
         super(User, self).__init__(email=email, password=password, **kwargs)

@@ -1,4 +1,4 @@
-from covidbed.model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganisationType, Region
+from covidbed.model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganizationType, Region
 
 
 def find_users():
@@ -14,24 +14,24 @@ def get_user_by_id(_id):
     return User.query.filter_by(id=_id).first()
 
 
-def create_user(params, organisation=None, platform=None):
+def create_user(params, organization=None, platform=None):
     """
 
     :param params:
     :return:
     """
     assert isinstance(params, dict)
-    assert organisation is None or isinstance(organisation, dict)
+    assert organization is None or isinstance(organization, dict)
     assert platform is None or isinstance(platform, dict)
 
-    if organisation:
-        org = create_organization(**organisation)
+    if organization:
+        org = create_organization(**organization)
     elif platform:
         org = Platform(**platform)
         org.save()
     else:
         org = None
-    user = User(organisation=org, **params)
+    user = User(organization=org, **params)
     user.save()
     return user
 
@@ -50,10 +50,10 @@ def create_organization(name, reg_code=None, address=None, company=None, etfines
     company_obj = Company(**company) if company else None
     etfiness_obj = FinessEtablissement(**etfiness) if etfiness else None
     if etfiness:
-        obj = Organization(name=name, reg_code=reg_code, type=OrganisationType.finess_et,
+        obj = Organization(name=name, reg_code=reg_code, type=OrganizationType.finess_et,
                            address=address_obj, data=etfiness_obj)
     else:
-        obj = Organization(name=name, reg_code=reg_code, type=OrganisationType.finess_et,
+        obj = Organization(name=name, reg_code=reg_code, type=OrganizationType.finess_et,
                            address=address_obj, data=company_obj)
     obj.save()
     return obj

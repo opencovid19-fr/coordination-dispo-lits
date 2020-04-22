@@ -65,7 +65,7 @@ class ResourcesApi(Resource):
                     errors.append({"code": f"CREATE_CONTACT",
                                    "message": "lastname, firstname, email, phone_number are required"})
 
-        platform = user.organisation
+        platform = user.organization
 
         if errors:
             return {"errors": errors}, 400

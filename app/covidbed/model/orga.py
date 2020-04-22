@@ -4,7 +4,7 @@ from sqlalchemy_utils import generic_relationship, ChoiceType
 from .abc import db, Base
 
 
-class OrganisationType(enum.IntEnum):
+class OrganizationType(enum.IntEnum):
     finess_et = 1
     company = 2
 
@@ -59,8 +59,8 @@ class Organization(Base):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
-    type = db.Column(ChoiceType(OrganisationType, impl=db.Integer()),
-                     nullable=False, default=OrganisationType.finess_et)
+    type = db.Column(ChoiceType(OrganizationType, impl=db.Integer()),
+                     nullable=False, default=OrganizationType.finess_et)
     reg_code = db.Column(db.String, db.ForeignKey('orga_region.code'))
 
     address_id = db.Column(db.Integer, db.ForeignKey('orga_address.id'))
