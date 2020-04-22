@@ -19,7 +19,8 @@ db_upgrade:
 test_db: compose.files = -f docker-compose.yml -f docker-compose-test.yml
 test_db:
 	docker-compose ${compose.files} up -d testdb
-	docker-compose ${compose.files} exec -T testdb pg_isready
+	docker-compose ${compose.files} exec -T testdb bash -c \
+		"while ! pg_isready ; do sleep .1; done"
 
 clean: containers = hub_testdb_1 hub_db_1
 clean:
