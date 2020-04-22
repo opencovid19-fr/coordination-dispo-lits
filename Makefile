@@ -7,6 +7,9 @@ run:
 test: build test_db
 	docker-compose ${compose.test} run --rm server
 
+prod:
+	docker-compose ${compose.prod} up -d
+
 initdb:
 	docker-compose run --rm server python manage.py db init
 
@@ -29,6 +32,7 @@ clean:
 
 compose.main = -f docker-compose.yml
 compose.test = ${compose.main} -f docker-compose-test.yml
+compose.prod = ${compose.main} -f docker-compose-prod.yml
 
 .env:
 	cp .env-template $@
