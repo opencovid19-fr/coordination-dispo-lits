@@ -29,8 +29,8 @@ class BedSerializer:
 class SupplySerializer:
     resource_fields = {
         'reanimators_count': fields.Integer,
-        'efp2_mask_count': fields.Integer,
-        'chir_mask_count': fields.Integer,
+        'efp2_masks_count': fields.Integer,
+        'chir_masks_count': fields.Integer,
         'blouses_count': fields.Integer,
         'gowns_count': fields.Integer,
     }
