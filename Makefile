@@ -24,10 +24,7 @@ test_db:
 	docker-compose ${compose.test} exec -T db bash -c \
 		"while ! pg_isready ; do sleep .1; done"
 
-clean: containers = hub_testdb_1 hub_db_1
 clean:
-	docker stop ${containers} || true
-	docker rm   ${containers} || true
 	docker-compose down
 
 compose.main = -f docker-compose.yml
