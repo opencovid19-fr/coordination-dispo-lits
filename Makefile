@@ -20,8 +20,8 @@ db_upgrade:
 	docker-compose run --rm server python manage.py db upgrade
 
 test_db:
-	docker-compose ${compose.test} up -d testdb
-	docker-compose ${compose.test} exec -T testdb bash -c \
+	docker-compose ${compose.test} up -d db
+	docker-compose ${compose.test} exec -T db bash -c \
 		"while ! pg_isready ; do sleep .1; done"
 
 clean: containers = hub_testdb_1 hub_db_1
