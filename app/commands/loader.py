@@ -1,7 +1,8 @@
 import os
 from flask_script import Command, Option
 from covidbed.util.loader import load_regions, load_finess_etablissements
-from covidbed.repository.user import create_organization, get_or_create_region, create_user
+from covidbed.repository.user import get_or_create_region, create_user
+from covidbed.repository.orga import create_organization
 
 import config
 
