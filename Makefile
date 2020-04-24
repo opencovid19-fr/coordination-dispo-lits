@@ -30,6 +30,9 @@ clean:
 mrproper: clean
 	docker volume rm -f hub_testdbdata hub_dbdata
 
+distclean: mrproper
+	\rm .env
+
 compose.main = -f docker-compose.yml
 compose.test = ${compose.main} -f docker-compose-test.yml
 compose.prod = ${compose.main} -f docker-compose-prod.yml
