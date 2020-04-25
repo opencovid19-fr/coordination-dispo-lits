@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: login to registry
+        run: docker login $REGISTRY -u "${{ github.actor }}"
+               --password-stdin <<< "${{ secrets.GITHUB_TOKEN }}"
+
       - name: run build
         run: make build
 
@@ -28,10 +32,6 @@ jobs:
 
           BUILD_IMAGE=hub_server
           IMAGE_NAME=covid-data-hub-server
-          REGISTRY=docker.pkg.github.com
-
-          docker login $REGISTRY -u "${{ github.actor }}" \
-             --password-stdin <<< "${{ secrets.GITHUB_TOKEN }}"
 
           VERSION=$(sed 's|refs/tags/v|| ; s|.*/||' <<< "${{ github.ref }}")
           IMAGE_ID=$REGISTRY/${{ github.repository }}/$IMAGE_NAME
