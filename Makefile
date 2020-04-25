@@ -5,7 +5,7 @@ run:
 	docker-compose up -d
 
 test: build test_db
-	docker-compose ${compose.test} run --rm server
+	docker-compose ${compose.test} run --rm server pytest
 
 prod:
 	docker-compose ${compose.prod} up -d
