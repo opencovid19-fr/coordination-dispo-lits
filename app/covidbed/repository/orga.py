@@ -1,4 +1,4 @@
-from covidbed.model import Organization, OrganizationType, FinessEtablissement, Company
+from covidbed.model import Organization, OrganizationType, FinessEtablissement, Company, Address
 
 
 def create_organization(name, reg_code=None, address=None, company=None, etfiness=None):

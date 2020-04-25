@@ -1,4 +1,5 @@
 from covidbed.model import User, Organization, Platform, FinessEtablissement, Address, Company, OrganizationType, Region
+from covidbed.repository.orga import create_organization
 
 
 def find_users():
