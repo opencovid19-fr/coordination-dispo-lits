@@ -10,6 +10,10 @@ on:
   pull_request: # run job 'test'
 
 
+env:
+  BUILD_IMAGE: hub_server
+  REGISTRY: docker.pkg.github.com
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -19,6 +23,12 @@ jobs:
       - name: login to registry
         run: docker login $REGISTRY -u "${{ github.actor }}"
                --password-stdin <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: fetch cache
+        run: |
+          CACHE=$REGISTRY/${{ github.repository }}/$BUILD_IMAGE
+          docker pull --all-tags  $CACHE || true
+          docker tag $CACHE $BUILD_IMAGE || true
 
       - name: run build
         run: make build
@@ -30,7 +40,6 @@ jobs:
         if: github.event_name == 'push'
         run: |
 
-          BUILD_IMAGE=hub_server
           IMAGE_NAME=covid-data-hub-server
 
           VERSION=$(sed 's|refs/tags/v|| ; s|.*/||' <<< "${{ github.ref }}")
