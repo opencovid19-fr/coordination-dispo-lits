@@ -16,21 +16,21 @@ from sqlalchemy.orm.exc import NoResultFound
 class OrganizationAPI(Resource):
     method_decorators = [jwt_required]
 
-    @swagger.operation(
-        notes='Organizations',
-        responseClasse=OrganizationSerializer.__name__,
-        nickname='organizations',
-        parameters=[
-            {
-                "name": "body",
-                "description": "organisations which might provide resources. It could be a company or a finess instutition."
-                "required": True,
-                "allowMultiple": False,
-                "dataType": OrganizationSerializer.__name__,
-                "paramType": "body",
-            }
-        ]
-    )
+    # @swagger.operation(
+    #     notes='Organizations',
+    #     responseClasse=OrganizationSerializer.__name__,
+    #     nickname='organizations',
+    #     parameters=[
+    #         {
+    #             "name": "body",
+    #             "description": "organisations which might provide resources. It could be a company or a finess instutition."
+    #             "required": True,
+    #             "allowMultiple": False,
+    #             "dataType": OrganizationSerializer.__name__,
+    #             "paramType": "body",
+    #         }
+    #     ]
+    # )
 
     def get(self):
         params = request.json
