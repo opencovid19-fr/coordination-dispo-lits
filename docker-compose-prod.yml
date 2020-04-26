@@ -5,22 +5,3 @@ services:
     command: /start.sh
     ports:
       - ${APP_PORT_PROD}:80
-
-  db:
-    image: postgres:9.4
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-      - ./docker/testdb/postgresql.conf:/etc/postgresql/postgresql.conf
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - postgres
-
-networks:
-  postgres:
-    driver: bridge
-
-volumes:
-  dbdata:

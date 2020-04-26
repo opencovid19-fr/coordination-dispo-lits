@@ -2,24 +2,11 @@ version: '3.5'
 
 services:
   server:
-    depends_on:
-        - testdb
-    environment:
-      - DB_HOST=testdb
     command: python -m unittest
 
-  testdb:
-    image: postgres:9.4
+  db:
     volumes:
-      - ./docker/testdb/postgresql.conf:/etc/postgresql/postgresql.conf
       - testdbdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - postgres
-
 
 volumes:
   testdbdata:

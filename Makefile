@@ -5,7 +5,7 @@ run:
 	docker-compose up -d
 
 test: build test_db
-	docker-compose ${compose.test} run --rm server
+	docker-compose ${compose.test} run --rm server pytest
 
 prod:
 	docker-compose ${compose.prod} up -d
@@ -20,15 +20,18 @@ db_upgrade:
 	docker-compose run --rm server python manage.py db upgrade
 
 test_db:
-	docker-compose ${compose.test} up -d testdb
-	docker-compose ${compose.test} exec -T testdb bash -c \
+	docker-compose ${compose.test} up -d db
+	docker-compose ${compose.test} exec -T db bash -c \
 		"while ! pg_isready ; do sleep .1; done"
 
-clean: containers = hub_testdb_1 hub_db_1
 clean:
-	docker stop ${containers} || true
-	docker rm   ${containers} || true
 	docker-compose down
+
+mrproper: clean
+	docker volume rm -f hub_testdbdata hub_dbdata
+
+distclean: mrproper
+	\rm .env
 
 compose.main = -f docker-compose.yml
 compose.test = ${compose.main} -f docker-compose-test.yml
