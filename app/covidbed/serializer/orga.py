@@ -42,3 +42,13 @@ class OrganizationSerializer:
         "finess_etablissement": fields.Nested(FinessEtablissementSerializer.resource_fields),
         "address": fields.Nested(AddressSerializer),
     }
+
+
+@swagger.model
+class OrganizationSearchRequestSerializer:
+    resource_fields = {
+        "id": fields.Integer,
+        "siret": fields.String,
+        "finess_et": fields.String,
+        "finess_ej": fields.String,
+    }

@@ -1,21 +1,16 @@
 from marshmallow import Schema, fields, validate, ValidationError, validates_schema
 
 
-class Company(Schema):
-    siret = fields.String(required=True)
-
-
-class FinessEtablissement(Schema):
+class OrganizationSearchRequest(Schema):
+    id = fields.Integer()
+    siret = fields.String()
     finess_et = fields.String()
     finess_ej = fields.String()
 
     @validates_schema
-    def finess_et_or_ej(self, data, **kwargs):
-        if ("finess_et" not in data) and ("finess_ej" not in data):
-            raise ValidationError("A finess_ej or a finess_et should be provided")
-
-
-class OrganizationRequest(Schema):
-    id = fields.Integer()
-    company = fields.Nested(Company, required=False, allow_none=True)
-    finess_etablissement = fields.Nested(FinessEtablissement, required=False, allow_none=True)
+    def combinations(self, data, **kwargs):
+        if not set(["id", "siret", "finess_et", "finess_ej"]).intersection(data):
+            raise ValidationError("Not enough informations")
+        # Checks if siret or (finess_et or finess_ej) in the fields
+        if ("siret" in data) and (("finess_et" in data) or ("finess_ej" in data)):
+            raise ValidationError("Siret and finess are incompatible")

@@ -34,7 +34,7 @@ class OrganizationAPI(Resource):
 
     def get(self):
         params = request.json
-        validator = orga_validator.OrganizationRequest()
+        validator = orga_validator.OrganizationSearchRequest()
         errors = validator.validate(params, many=False)
         if errors:
             return {"errors": [{"code": f"BAD_PARAM_{k.upper()}", "message": "\n".join(v)} for k, v in
@@ -44,29 +44,21 @@ class OrganizationAPI(Resource):
         
         # First we evaluate if the organization already exists
         orga = None
-        if "id" in params:
-            orga = orga_repository.get_organization_by_id(params["id"])
-        elif "company" in params:
-            orga = orga_repository.get_organization_by_siret(params["company"]["siret"])
-        elif "finess_etablissement" in params:
-            if ("finess_et" in params["finess_etablissement"]) and ("finess_ej" not in params["finess_etablissement"]):
-                orga = orga_repository.get_organization_by_finess_et(params["finess_etablissement"]["finess_et"])
-            elif ("finess_ej" in params["finess_etablissement"]) and ("finess_et" not in params["finess_etablissement"]):
-                orga = orga_repository.get_organization_by_finess_ej(params["finess_etablissement"]["finess_ej"])
-            else:
-                # If both et and ej provided, we check they corrresponds to the same entitty
-                orga_et = orga_repository.get_organization_by_finess_et(params["finess_etablissement"]["finess_et"])
-                orga_ej = orga_repository.get_organization_by_finess_ej(params["finess_etablissement"]["finess_ej"])
-                if orga_et == orga_ej:
-                    orga = orga_et
-                else:
-                    errors.append({
-                        "code": f"MISMATCHING_ET_EJ",
-                        "message": "finess_et and finess_ej don't correspond to the same entity"
-                    })
-
-        if errors:
+        get_func_dict = {
+            "id": orga_repository.get_organization_by_id,
+            "siret": orga_repository.get_organization_by_siret,
+            "finess_et": orga_repository.get_organization_by_finess_et,
+            "finess_ej": orga_repository.get_organization_by_finess_ej
+        }
+        result = {field: get_func_dict[field](param) for field, param in params.items()}
+        if len(set(result.values())) != 1:
+            errors.append({
+                "code": f"MISMATCHING_RETRIEVAL",
+                "message": "finess_et and finess_ej don't correspond to the same entity"
+            })
             return {"errors": errors}, 400
+
+        key, orga = next(iter(result.items()))
         
         if orga is None:
             errors.append({
@@ -76,4 +68,4 @@ class OrganizationAPI(Resource):
             return {"errors": errors}, 400
 
         if orga is not None:
-            return orga.json, 200
+            return {"orga": orga.json, "retrived_key": key}, 200
