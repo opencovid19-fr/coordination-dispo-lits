@@ -34,6 +34,7 @@ class OrganizationAPI(Resource):
 
     def get(self):
         params = request.json
+        print(params)
         validator = orga_validator.OrganizationSearchRequest()
         errors = validator.validate(params, many=False)
         if errors:
