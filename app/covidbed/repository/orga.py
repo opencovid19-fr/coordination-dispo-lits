@@ -11,10 +11,12 @@ def create_organization(name, reg_code=None, address=None, company=None, etfines
     company_obj = Company(**company) if company else None
     etfiness_obj = FinessEtablissement(**etfiness) if etfiness else None
     if etfiness:
+        etfiness_obj.save()
         obj = Organization(
             name=name, reg_code=reg_code, type=OrganizationType.finess_et, address=address_obj, data=etfiness_obj
         )
     else:
+        company_obj.save()
         obj = Organization(
             name=name, reg_code=reg_code, type=OrganizationType.company, address=address_obj, data=company_obj
         )

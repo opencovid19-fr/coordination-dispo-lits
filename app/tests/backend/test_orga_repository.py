@@ -21,12 +21,16 @@ class TestOrga(BaseTest):
             "company": {"siret": siret_number},
         }
         organization = orga_repository.create_organization(**organization)
+        print(organization)
+        print(organization.data)
+        print(organization.object_type)
         self.assertEqual(organization.id, 1)
         self.assertEqual(organization.type, OrganizationType.company)
         self.assertEqual(organization.data.siret, siret_number)
 
     def test_create_organization_finess(self):
         finess_et = "12"
+        finess_ej = "13"
         organization = {
             "name": "Ma plateform",
             "address": {
@@ -36,12 +40,13 @@ class TestOrga(BaseTest):
                 "lon": None,
                 "lat": None,
             },
-            "etfiness": {"finess_et": finess_et},
+            "etfiness": {"finess_et": finess_et, "finess_ej": finess_ej},
         }
         organization = orga_repository.create_organization(**organization)
         self.assertEqual(organization.id, 1)
         self.assertEqual(organization.type, OrganizationType.finess_et)
         self.assertEqual(organization.data.finess_et, finess_et)
+        self.assertEqual(organization.data.finess_ej, finess_ej)
 
     def test_get_by_finess_id(self):
         obj = orga_repository.get_organization_by_id(1002)
