@@ -33,6 +33,12 @@ jobs:
       - name: run build
         run: make build
 
+      - name: push cache
+        run: |
+          CACHE=$REGISTRY/${{ github.repository }}/$BUILD_IMAGE
+          docker tag  $BUILD_IMAGE $CACHE
+          docker push $CACHE || true
+
       - name: run tests
         run: make test
 
