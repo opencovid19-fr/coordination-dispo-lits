@@ -12,7 +12,7 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 't1NP63m4wnBg6nyHYKfmc2TpCOGI4nss')
 BASE_SERVER_PATH = os.environ.get("BASE_SERVER_PATH", 'http://127.0.0.1:5000/')
 
-FIXTURES_LIST = os.environ.get("FIXTURES_LIST", 'users.json')
+FIXTURES_LIST = os.environ.get("FIXTURES_LIST", 'users.json,resources.json')
 
 POSTGRES = {
     'host': os.getenv('DB_HOST'),

@@ -21,17 +21,20 @@ class OrganizationType(enum.IntEnum):
 
 
 class Platform(Base):
-    __tablename__ = 'orga_platform'
+    __tablename__ = "orga_platform"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
 
 
 class Address(Base):
-    __tablename__ = 'orga_address'
+    __tablename__ = "orga_address"
 
-    to_json_filter = ('id', "organization", )
-    print_filter = ('organization', )
+    to_json_filter = (
+        "id",
+        "organization",
+    )
+    print_filter = ("organization",)
 
     id = db.Column(db.Integer, primary_key=True)
     street = db.Column(db.String(50))
@@ -45,28 +48,34 @@ class Address(Base):
 
 
 class Region(Base):
-    __tablename__ = 'orga_region'
+    __tablename__ = "orga_region"
 
-    code = db.Column(db.String(2),  primary_key=True)
+    code = db.Column(db.String(2), primary_key=True)
     tncc = db.Column(db.String(20), nullable=False)
     libelle = db.Column(db.String(30), nullable=False)
 
 
 class Organization(Base):
-    __tablename__ = 'orga_organization'
+    __tablename__ = "orga_organization"
 
-    to_json_filter = ('object_type', 'object_id', 'availabilities', )
+    to_json_filter = (
+        "object_type",
+        "object_id",
+        "availabilities",
+        "address_id",
+    )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
-    type = db.Column(ChoiceType(OrganizationType, impl=db.Integer()),
-                     nullable=False, default=OrganizationType.finess_et)
-    reg_code = db.Column(db.String, db.ForeignKey('orga_region.code'))
+    type = db.Column(
+        ChoiceType(OrganizationType, impl=db.Integer()), nullable=False, default=OrganizationType.finess_et
+    )
+    reg_code = db.Column(db.String, db.ForeignKey("orga_region.code"))
 
-    address_id = db.Column(db.Integer, db.ForeignKey('orga_address.id'))
+    address_id = db.Column(db.Integer, db.ForeignKey("orga_address.id"))
     address = db.relationship(Address, back_populates="organization")
 
-   # This is used to discriminate between the linked tables.
+    # This is used to discriminate between the linked tables.
     object_type = db.Column(db.Unicode(255))
     # This is used to point to the primary key of the linked row.
     object_id = db.Column(db.Integer)
@@ -74,7 +83,7 @@ class Organization(Base):
 
 
 class FinessEtablissement(Base):
-    __tablename__ = 'orga_finesset'
+    __tablename__ = "orga_finesset"
 
     id = db.Column(db.Integer, primary_key=True)
     finess_et = db.Column(db.String(15), nullable=False)
@@ -82,8 +91,7 @@ class FinessEtablissement(Base):
 
 
 class Company(Base):
-    __tablename__ = 'orga_company'
+    __tablename__ = "orga_company"
 
     id = db.Column(db.Integer, primary_key=True)
     siret = db.Column(db.String(15), nullable=False)
-

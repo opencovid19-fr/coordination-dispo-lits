@@ -46,25 +46,64 @@
         "city": "BELLEY",
         "lon": 5.684976115612651,
         "lat": 45.761208103246986
+      },
+      {
+        "id": 2001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "street": "7 Rue du 14 Juillet",
+        "zipcode": "45390",
+        "insee_code": "45258",
+        "city": "PUISEAUX",
+        "lon": 2.469977,
+        "lat": 48.2041928
+      },
+      {
+        "id": 2002,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "street": "12 Place du Général de Gaulle",
+        "zipcode": "51310",
+        "insee_code": "51237",
+        "city": "ESTERNAY",
+        "lon": 3.5562679,
+        "lat": 48.7312009
       }
     ]
   },
-   {
+  {
     "model": "covidbed.model.FinessEtablissement",
     "records": [
       {
         "id": 1001,
         "created_at": "2020-04-15T12:40:14.462544",
         "updated_at": "2020-04-15T12:40:14.462544",
-        "finess_et": "12345567880",
-        "finess_ej": "12345567880"
+        "finess_et": 123,
+        "finess_ej": 124
       },
       {
         "id": 1002,
         "created_at": "2020-04-15T12:40:14.462544",
         "updated_at": "2020-04-15T12:40:14.462544",
-        "finess_et": "12345567898",
-        "finess_ej": "12345567898"
+        "finess_et": 234,
+        "finess_ej": 235
+      }
+    ]
+  },
+  {
+    "model": "covidbed.model.Company",
+    "records": [
+      {
+        "id": 2001,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "siret": 12
+      },
+      {
+        "id": 2002,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "siret": 13
       }
     ]
   },
@@ -90,6 +129,26 @@
         "address_id": 1002,
         "object_type": "FinessEtablissement",
         "object_id": 1002
+      },
+      {
+        "id": 1003,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "COMPANY FAKE 1",
+        "type": 2,
+        "address_id": 2001,
+        "object_type": "Company",
+        "object_id": 2001
+      },
+      {
+        "id": 1004,
+        "created_at": "2020-04-15T12:40:14.462544",
+        "updated_at": "2020-04-15T12:40:14.462544",
+        "name": "COMPANY FAKE 2",
+        "type": 2,
+        "address_id": 2002,
+        "object_type": "Company",
+        "object_id": 2002
       }
     ]
   }
