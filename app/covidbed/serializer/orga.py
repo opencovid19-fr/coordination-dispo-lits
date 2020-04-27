@@ -56,7 +56,7 @@ class OrganizationSerializer:
         "data": fields.Nested(OrganizationDataSerializer.resource_fields),
         "address": fields.Nested(AddressSerializer.resource_fields),
     }
-    required = ["data", "address"]
+    required = ["id", "name", "reg_code", "type", "data", "address"]
 
 
 @swagger.model
