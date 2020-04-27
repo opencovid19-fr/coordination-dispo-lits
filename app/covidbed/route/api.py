@@ -5,7 +5,7 @@ from flask_restful_swagger import swagger
 from config import BASE_SERVER_PATH
 from covidbed.resource.user import LoginApi, UserAPI, UserListAPI
 from covidbed.resource.resource import ResourcesApi
-from covidbed.resource.orga import OrganizationAPI
+from covidbed.resource.orga import OrganizationSearchAPI
 
 api_blueprint = Blueprint("api", __name__)
 
@@ -26,4 +26,4 @@ api.add_resource(UserAPI, "/users/<int:id>")
 
 api.add_resource(ResourcesApi, "/resources")
 
-api.add_resource(OrganizationAPI, "/organizations")
+api.add_resource(OrganizationSearchAPI, "/organizations")

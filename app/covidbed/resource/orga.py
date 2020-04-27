@@ -6,31 +6,31 @@ from flask_jwt_extended import create_access_token, jwt_required
 from flask_restful import  Resource
 from flask_restful_swagger import swagger
 
-from covidbed.serializer.orga import OrganizationSerializer
+from covidbed.serializer.orga import OrganizationSearchRequestSerializer, OrganizationSearchResponseSerializer
 
 from covidbed.repository import orga as orga_repository
 from covidbed.validator import orga as orga_validator
 
 from sqlalchemy.orm.exc import NoResultFound
 
-class OrganizationAPI(Resource):
+class OrganizationSearchAPI(Resource):
     method_decorators = [jwt_required]
 
-    # @swagger.operation(
-    #     notes='Organizations',
-    #     responseClasse=OrganizationSerializer.__name__,
-    #     nickname='organizations',
-    #     parameters=[
-    #         {
-    #             "name": "body",
-    #             "description": "organisations which might provide resources. It could be a company or a finess instutition."
-    #             "required": True,
-    #             "allowMultiple": False,
-    #             "dataType": OrganizationSerializer.__name__,
-    #             "paramType": "body",
-    #         }
-    #     ]
-    # )
+    @swagger.operation(
+        notes='Organizations',
+        responseClass=OrganizationSearchResponseSerializer.__name__,
+        nickname='organizations search',
+        parameters=[
+            {
+                "name": "body",
+                "description": "organisations which might provide resources. It could be a company or a finess instutition.",
+                "required": True,
+                "allowMultiple": False,
+                "dataType": OrganizationSearchRequestSerializer.__name__,
+                "paramType": "body",
+            }
+        ]
+    )
 
     def get(self):
         params = request.json
@@ -68,4 +68,4 @@ class OrganizationAPI(Resource):
             })
             return {"errors": errors}, 400
 
-        return {"orga": orga.json, "retrived_key": key}, 200
+        return {"organization": orga.json, "retrived_key": key}, 200

@@ -29,17 +29,20 @@ class AddressSerializer:
         "city": fields.String,
         "lon": fields.Float,
         "lat": fields.Float,
-        # "organizations": fields.List(fields.Nested(OrganizationSerializer.resource_fields)),
     }
 
 
 @swagger.model
+@swagger.nested(company=CompanySerializer.__name__)
+@swagger.nested(finess_etablissement=FinessEtablissementSerializer.__name__)
+@swagger.nested(address=AddressSerializer.__name__)
 class OrganizationSerializer:
     resource_fields = {
         "id": fields.Integer,
         "name": fields.String,
-        "company": fields.Nested(CompanySerializer.resource_fields),
-        "finess_etablissement": fields.Nested(FinessEtablissementSerializer.resource_fields),
+        "reg_code": fields.String,
+        "type": fields.Integer,
+        "address_id": fields.Integer,
         "address": fields.Nested(AddressSerializer),
     }
 
@@ -51,4 +54,13 @@ class OrganizationSearchRequestSerializer:
         "siret": fields.String,
         "finess_et": fields.String,
         "finess_ej": fields.String,
+    }
+
+
+@swagger.model
+@swagger.nested(organization=OrganizationSerializer.__name__)
+class OrganizationSearchResponseSerializer:
+    resource_fields = {
+        "organization": fields.Nested(OrganizationSerializer.resource_fields),
+        "retrieved_key": fields.String(),
     }
