@@ -30,6 +30,7 @@ class AddressSerializer:
         "lon": fields.Float,
         "lat": fields.Float,
     }
+    required = []
 
 
 @swagger.model
@@ -40,20 +41,22 @@ class OrganizationDataSerializer:
         "finess_et": fields.String,
         "finess_ej": fields.String,
     }
+    required = []
 
 
 @swagger.model
-@swagger.nested(data=OrganizationDataSerializer.__name__)
-@swagger.nested(address=AddressSerializer.__name__)
+@swagger.nested(data=OrganizationDataSerializer.__name__,
+                address=AddressSerializer.__name__)
 class OrganizationSerializer:
     resource_fields = {
         "id": fields.Integer,
         "name": fields.String,
         "reg_code": fields.String,
         "type": fields.Integer,
-        "data": fields.Nested(FinessEtablissementSerializer.resource_fields),
+        "data": fields.Nested(OrganizationDataSerializer.resource_fields),
         "address": fields.Nested(AddressSerializer.resource_fields),
     }
+    required = ["data", "address"]
 
 
 @swagger.model
