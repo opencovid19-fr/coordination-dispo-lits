@@ -5,7 +5,7 @@ from flask_restful import fields
 @swagger.model
 class CompanySerializer:
     resource_fields = {
-        "id": fields.Integer(attribute="company_id"),
+        "id": fields.Integer,
         "siret": fields.String,
     }
 
@@ -13,7 +13,7 @@ class CompanySerializer:
 @swagger.model
 class FinessEtablissementSerializer:
     resource_fields = {
-        "id": fields.Integer(attribute="finess_etablissement_id"),
+        "id": fields.Integer,
         "finess_et": fields.String,
         "finess_ej": fields.String,
     }
@@ -33,9 +33,18 @@ class AddressSerializer:
 
 
 @swagger.model
-@swagger.nested(company=CompanySerializer.__name__)
-@swagger.nested(finess_etablissement=FinessEtablissementSerializer.__name__)
+class OrganizationDataSerializer:
+    resource_fields = {
+        "id": fields.Integer,
+        "siret": fields.String,
+        "finess_et": fields.String,
+        "finess_ej": fields.String,
+    }
+
+
+@swagger.model
 @swagger.nested(address=AddressSerializer.__name__)
+@swagger.nested(data=OrganizationDataSerializer.__name__)
 class OrganizationSerializer:
     resource_fields = {
         "id": fields.Integer,
@@ -43,7 +52,17 @@ class OrganizationSerializer:
         "reg_code": fields.String,
         "type": fields.Integer,
         "address_id": fields.Integer,
-        "address": fields.Nested(AddressSerializer),
+        "address": fields.Nested(AddressSerializer.resource_fields),
+        "data": fields.Nested(OrganizationDataSerializer.resource_fields),
+    }
+
+
+@swagger.model
+@swagger.nested(organization=OrganizationSerializer.__name__)
+class OrganizationSearchResponseSerializer:
+    resource_fields = {
+        "organization": fields.Nested(OrganizationSerializer.resource_fields),
+        "retrieved_key": fields.String(),
     }
 
 
@@ -54,13 +73,4 @@ class OrganizationSearchRequestSerializer:
         "siret": fields.String,
         "finess_et": fields.String,
         "finess_ej": fields.String,
-    }
-
-
-@swagger.model
-@swagger.nested(organization=OrganizationSerializer.__name__)
-class OrganizationSearchResponseSerializer:
-    resource_fields = {
-        "organization": fields.Nested(OrganizationSerializer.resource_fields),
-        "retrieved_key": fields.String(),
     }
