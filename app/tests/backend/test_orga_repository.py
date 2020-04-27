@@ -5,7 +5,7 @@ from tests.utils.mixins import BaseTest
 
 
 class TestOrga(BaseTest):
-    fixtures = ["resources.json"]
+    fixtures = ["users.json", "resources.json"]
 
     def test_create_organization_siret(self):
         siret_number = "12"
