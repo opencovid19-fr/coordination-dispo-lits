@@ -4,7 +4,10 @@ services:
   server:
     env_file:
       - .env
-    build: .
+    build:
+      context: .
+      cache_from:
+      - hub_server
     volumes:
       - ./app:/app
     depends_on:

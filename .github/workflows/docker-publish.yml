@@ -9,44 +9,51 @@ on:
 
   pull_request: # run job 'test'
 
+
 env:
-  IMAGE_NAME: covid-data-hub-server
+  BUILD_IMAGE: hub_server
   REGISTRY: docker.pkg.github.com
-  AUTH: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-
-  test:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: login to registry
+        run: docker login $REGISTRY -u "${{ github.actor }}"
+               --password-stdin <<< "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: fetch cache
+        run: |
+          CACHE=$REGISTRY/${{ github.repository }}/$BUILD_IMAGE
+          docker pull --all-tags  $CACHE || true
+          docker tag $CACHE $BUILD_IMAGE || true
+
+      - name: run build
+        run: make build
+
+      - name: push cache
+        run: |
+          CACHE=$REGISTRY/${{ github.repository }}/$BUILD_IMAGE
+          docker tag  $BUILD_IMAGE $CACHE
+          docker push $CACHE || true
 
       - name: run tests
         run: make test
 
-  push:
-    needs: test
-
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: build image
-        run: docker build . --tag $IMAGE_NAME
-
-      - name: log into registry
-        run: docker login $REGISTRY -u ${{ github.actor }}
-             --password-stdin <<< "$AUTH"
-
-      - name: push image
+      - name: publish image
+        if: github.event_name == 'push'
         run: |
+
+          IMAGE_NAME=covid-data-hub-server
+
           VERSION=$(sed 's|refs/tags/v|| ; s|.*/||' <<< "${{ github.ref }}")
           IMAGE_ID=$REGISTRY/${{ github.repository }}/$IMAGE_NAME
           IMAGE_ID=$(tr '[A-Z]' '[a-z]' <<< "$IMAGE_ID")
 
           [ "$VERSION" == "master" ] && VERSION=latest
 
-          docker tag  $IMAGE_NAME $IMAGE_ID:$VERSION
+          set -x
+          docker tag  $BUILD_IMAGE $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
