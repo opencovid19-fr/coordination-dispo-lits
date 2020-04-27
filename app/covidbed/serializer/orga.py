@@ -43,17 +43,16 @@ class OrganizationDataSerializer:
 
 
 @swagger.model
-@swagger.nested(address=AddressSerializer.__name__)
 @swagger.nested(data=OrganizationDataSerializer.__name__)
+@swagger.nested(address=AddressSerializer.__name__)
 class OrganizationSerializer:
     resource_fields = {
         "id": fields.Integer,
         "name": fields.String,
         "reg_code": fields.String,
         "type": fields.Integer,
-        "address_id": fields.Integer,
+        "data": fields.Nested(FinessEtablissementSerializer.resource_fields),
         "address": fields.Nested(AddressSerializer.resource_fields),
-        "data": fields.Nested(OrganizationDataSerializer.resource_fields),
     }
 
 

@@ -62,6 +62,7 @@ class Organization(Base):
         "object_type",
         "object_id",
         "availabilities",
+        "address_id",
     )
 
     id = db.Column(db.Integer, primary_key=True)
