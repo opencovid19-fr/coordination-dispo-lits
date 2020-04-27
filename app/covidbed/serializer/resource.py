@@ -49,10 +49,10 @@ class ContactSerializer:
 
 
 @swagger.model
-@swagger.nested(bed=BedSerializer.__name__)
-@swagger.nested(supply=SupplySerializer.__name__)
-@swagger.nested(human=HumanSerializer.__name__)
-@swagger.nested(contact=ContactSerializer.__name__)
+@swagger.nested(bed=BedSerializer.__name__,
+                supply=SupplySerializer.__name__,
+                human=HumanSerializer.__name__,
+                contact=ContactSerializer.__name__)
 class ResourceSerializer:
     resource_fields = {
         'date': fields.DateTime,
