@@ -68,5 +68,4 @@ class OrganizationAPI(Resource):
             })
             return {"errors": errors}, 400
 
-        if orga is not None:
-            return {"orga": orga.json, "retrived_key": key}, 200
+        return {"orga": orga.json, "retrived_key": key}, 200
