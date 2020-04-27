@@ -15,7 +15,7 @@ class TestOrga(BaseAuthMixin, BaseTest):
         url = "api/organizations"
         params = {"id": 1001}
         expected_result = {
-            "orga": {
+            "organization": {
                 "address": {
                     "created_at": "2020-04-15T12:40:14.462544",
                     "updated_at": "2020-04-15T12:40:14.462544",
@@ -39,7 +39,6 @@ class TestOrga(BaseAuthMixin, BaseTest):
                 "name": "CH FAKE 1",
                 "type": 1,
                 "reg_code": None,
-                "address_id": 1001,
             },
             "retrived_key": "id",
         }
@@ -53,7 +52,7 @@ class TestOrga(BaseAuthMixin, BaseTest):
         url = "api/organizations"
         params = {"siret": "12"}
         expected_result = {
-            "orga": {
+            "organization": {
                 "address": {
                     "created_at": "2020-04-15T12:40:14.462544",
                     "updated_at": "2020-04-15T12:40:14.462544",
@@ -76,7 +75,6 @@ class TestOrga(BaseAuthMixin, BaseTest):
                 "name": "COMPANY FAKE 1",
                 "type": 2,
                 "reg_code": None,
-                "address_id": 2001,
             },
             "retrived_key": "siret",
         }
@@ -90,7 +88,7 @@ class TestOrga(BaseAuthMixin, BaseTest):
         url = "api/organizations"
         params = {"finess_et": "123"}
         expected_result = {
-            "orga": {
+            "organization": {
                 "address": {
                     "created_at": "2020-04-15T12:40:14.462544",
                     "updated_at": "2020-04-15T12:40:14.462544",
@@ -114,7 +112,6 @@ class TestOrga(BaseAuthMixin, BaseTest):
                 "name": "CH FAKE 1",
                 "type": 1,
                 "reg_code": None,
-                "address_id": 1001,
             },
             "retrived_key": "finess_et",
         }
@@ -128,7 +125,7 @@ class TestOrga(BaseAuthMixin, BaseTest):
         url = "api/organizations"
         params = {"finess_ej": "124"}
         expected_result = {
-            "orga": {
+            "organization": {
                 "address": {
                     "created_at": "2020-04-15T12:40:14.462544",
                     "updated_at": "2020-04-15T12:40:14.462544",
@@ -152,7 +149,6 @@ class TestOrga(BaseAuthMixin, BaseTest):
                 "name": "CH FAKE 1",
                 "type": 1,
                 "reg_code": None,
-                "address_id": 1001,
             },
             "retrived_key": "finess_ej",
         }
