@@ -12,7 +12,7 @@ flask-restful-swagger
 Flask-Fixtures==0.3.8
 alembic==1.0.10
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 psycopg2==2.8.2
 pyproj==2.6.0
 pytz==2019.1
