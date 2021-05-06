@@ -1,6 +1,6 @@
 Flask==1.0.3
 Flask-Bcrypt==0.7.1
-Flask-Cors==1.8.0
+Flask-Cors==3.0.9
 Flask-HTTPAuth==3.3.0
 Flask-JWT-Extended==3.24.1
 flask-marshmallow==0.5.1
